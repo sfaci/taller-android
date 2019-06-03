@@ -7,9 +7,8 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sfaci.contacts.domain.Friend;
-
-import java.text.SimpleDateFormat;
+import com.sfaci.contacts.domain.Contact;
+import com.sfaci.contacts.util.DateUtils;
 
 /**
  * Activity donde se muestran los detalles de cada contacto
@@ -21,9 +20,9 @@ public class DetailsActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detalles);
+        setContentView(R.layout.activity_details);
 
-        int posicion = getIntent().getIntExtra("posicion", -1);
+        int posicion = getIntent().getIntExtra("position", -1);
         if (posicion != -1)
             loadDetails(posicion);
     }
@@ -36,22 +35,19 @@ public class DetailsActivity extends Activity {
         TextView tvPhone = findViewById(R.id.tvTelephone);
         TextView tvMobile = findViewById(R.id.tvMobile);
         TextView tvBirthDate = findViewById(R.id.tvBirthDate);
-        TextView tvDebts = findViewById(R.id.tvDebts);
 
-        Friend friend = MainActivity.friendsList.get(position);
-        ivPicture.setImageBitmap(friend.getPicture());
-        tvName.setText(friend.getName());
-        tvEmail.setText(friend.getEmail());
-        tvPhone.setText(friend.getTelephone());
-        tvMobile.setText(friend.getMobile());
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        tvBirthDate.setText(sdf.format(friend.getBirthDate()));
-        tvDebts.setText(String.valueOf(friend.getDebts()));
+        Contact contact = MainActivity.friendsList.get(position);
+        ivPicture.setImageBitmap(contact.getPicture());
+        tvName.setText(contact.getName());
+        tvEmail.setText(contact.getEmail());
+        tvPhone.setText(contact.getTelephone());
+        tvMobile.setText(contact.getMobile());
+        tvBirthDate.setText(DateUtils.toString(contact.getBirthDate()));
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_detalles, menu);
+        getMenuInflater().inflate(R.menu.menu_details, menu);
         return true;
     }
 

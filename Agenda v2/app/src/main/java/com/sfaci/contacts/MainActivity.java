@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import com.sfaci.contacts.domain.Friend;
+import com.sfaci.contacts.domain.Contact;
 
 import java.util.ArrayList;
 
@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class MainActivity extends Activity implements View.OnClickListener {
 
-    public static ArrayList<Friend> friendsList = new ArrayList<Friend>();
+    public static ArrayList<Contact> contactsList = new ArrayList<Contact>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btRegister.setOnClickListener(this);
         Button btList = findViewById(R.id.btList);
         btList.setOnClickListener(this);
+        Button btEventos = findViewById(R.id.btEvents);
+        btEventos.setOnClickListener(this);
     }
 
     @Override
@@ -60,6 +62,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 // El usuario ha pulsado el botón de Listado. Se mostrará el listado de amigos registrados
                 startActivity(new Intent(this, ListActivity.class));
                 break;
+            case R.id.btEvents:
+                startActivity(new Intent(this, EventsActivity.class));
             default:
                 break;
         }

@@ -23,7 +23,6 @@ public class Contact {
         this.mobile = mobile;
         this.picture = picture;
         this.birthDate = birthDate;
-        this.debts = debts;
     }
 
     private String name;
@@ -32,7 +31,6 @@ public class Contact {
     private String mobile;
     private Bitmap picture;
     private Date birthDate;
-    private float debts;
     private double latitude;
     private double longitude;
 
@@ -82,14 +80,6 @@ public class Contact {
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
-    }
-
-    public float getDebts() {
-        return debts;
-    }
-
-    public void setDebts(float debts) {
-        this.debts = debts;
     }
 
     @Override

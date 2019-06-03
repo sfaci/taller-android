@@ -2,11 +2,9 @@ package com.sfaci.contacts;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -17,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.sfaci.contacts.adapters.ContactAdapter;
 import com.sfaci.contacts.database.Database;
@@ -35,7 +32,7 @@ public class ListActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listado);
+        setContentView(R.layout.activity_list);
 
         ListView lvFriends = findViewById(R.id.lvFriends);
         Database db = new Database(this);
@@ -56,7 +53,7 @@ public class ListActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_listado, menu);
+        getMenuInflater().inflate(R.menu.menu_list, menu);
         return true;
     }
 
@@ -80,7 +77,7 @@ public class ListActivity extends Activity {
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
 
-        getMenuInflater().inflate(R.menu.menu_context_listado, menu);
+        getMenuInflater().inflate(R.menu.menu_context_list, menu);
     }
 
     @Override
@@ -98,10 +95,10 @@ public class ListActivity extends Activity {
                 String telephone = contact.getTelephone();
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
                 callIntent.setData(Uri.parse("tel: " + telephone));
-                askForCallingPermission();
+                /*askForCallingPermission();
                 if (checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                     return false;
-                }
+                }*/
                 startActivity(callIntent);
                 break;
             case R.id.action_movil:
@@ -144,10 +141,6 @@ public class ListActivity extends Activity {
                 emailIntent.putExtra(Intent.EXTRA_EMAIL, contact.getEmail());
                 emailIntent.setType("message/rfc822");
                 startActivity(Intent.createChooser(emailIntent, getString(R.string.msg_select_email)));
-                break;
-            case R.id.action_map:
-                Intent mapIntent = new Intent(this, MapActivity.class);
-                startActivity(mapIntent);
                 break;
             case R.id.action_detalles:
                 Intent detailsIntent = new Intent(this, DetailsActivity.class);

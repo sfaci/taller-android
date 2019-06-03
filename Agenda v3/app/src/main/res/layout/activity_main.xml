@@ -1,8 +1,9 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp">
+    android:padding="20dp"
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/btRegister"
@@ -20,4 +21,4 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="@string/lb_list" />
-</RelativeLayout>
+</LinearLayout>

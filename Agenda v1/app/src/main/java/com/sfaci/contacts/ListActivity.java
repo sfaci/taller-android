@@ -1,6 +1,5 @@
 package com.sfaci.contacts;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Notification;
@@ -8,7 +7,6 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -19,8 +17,8 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.sfaci.contacts.adapters.FriendAdapter;
-import com.sfaci.contacts.domain.Friend;
+import com.sfaci.contacts.adapters.ContactAdapter;
+import com.sfaci.contacts.domain.Contact;
 
 /**
  * Activity donde se listan todos los contactos
@@ -29,15 +27,15 @@ import com.sfaci.contacts.domain.Friend;
  */
 public class ListActivity extends Activity {
 
-    private FriendAdapter adapter;
+    private ContactAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listado);
+        setContentView(R.layout.activity_list);
 
         ListView lvFriends = findViewById(R.id.lvFriends);
-        adapter = new FriendAdapter(this, MainActivity.friendsList);
+        adapter = new ContactAdapter(this, MainActivity.friendsList);
         lvFriends.setAdapter(adapter);
 
         registerForContextMenu(lvFriends);
@@ -51,7 +49,7 @@ public class ListActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_listado, menu);
+        getMenuInflater().inflate(R.menu.menu_list, menu);
         return true;
     }
 
@@ -75,7 +73,7 @@ public class ListActivity extends Activity {
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
 
-        getMenuInflater().inflate(R.menu.menu_context_listado, menu);
+        getMenuInflater().inflate(R.menu.menu_context_list, menu);
     }
 
     @Override
@@ -84,23 +82,23 @@ public class ListActivity extends Activity {
         AdapterContextMenuInfo info =
                 (AdapterContextMenuInfo) item.getMenuInfo();
         final int selectedItem = info.position;
-        Friend friend = null;
+        Contact contact = null;
 
         switch (item.getItemId()) {
             case R.id.action_fijo:
-                friend = MainActivity.friendsList.get(selectedItem);
-                String telephone = friend.getTelephone();
+                contact = MainActivity.friendsList.get(selectedItem);
+                String telephone = contact.getTelephone();
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
                 callIntent.setData(Uri.parse("tel: " + telephone));
-                askForCallingPermission();
+                /*askForCallingPermission();
                 if (checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                     return false;
-                }
+                }*/
                 startActivity(callIntent);
                 break;
             case R.id.action_movil:
-                friend = MainActivity.friendsList.get(selectedItem);
-                String mobile = friend.getMobile();
+                contact = MainActivity.friendsList.get(selectedItem);
+                String mobile = contact.getMobile();
                 Intent mobileIntent = new Intent(Intent.ACTION_CALL);
                 mobileIntent.setData(Uri.parse("tel: " + mobile));
                 startActivity(mobileIntent);
@@ -133,9 +131,9 @@ public class ListActivity extends Activity {
                 builder.create().show();
                 break;
             case R.id.action_email:
-                friend = MainActivity.friendsList.get(selectedItem);
+                contact = MainActivity.friendsList.get(selectedItem);
                 Intent emailIntent = new Intent(Intent.ACTION_SEND);
-                emailIntent.putExtra(Intent.EXTRA_EMAIL, friend.getEmail());
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, contact.getEmail());
                 emailIntent.setType("message/rfc822");
                 startActivity(Intent.createChooser(emailIntent, getString(R.string.msg_select_email)));
                 break;
@@ -158,7 +156,7 @@ public class ListActivity extends Activity {
         return false;
     }
 
-    private void askForCallingPermission() {
+    /*private void askForCallingPermission() {
         if (checkSelfPermission(Manifest.permission.READ_CONTACTS)
                 != PackageManager.PERMISSION_GRANTED) {
 
@@ -167,5 +165,5 @@ public class ListActivity extends Activity {
                 requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, 1);
             }
         }
-    }
+    }*/
 }

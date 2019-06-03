@@ -18,7 +18,6 @@ import static com.sfaci.contacts.util.Constants.CONTACTS_TABLE;
 
 import static android.provider.BaseColumns._ID;
 import static com.sfaci.contacts.util.Constants.CONTACT_BIRTHDATE;
-import static com.sfaci.contacts.util.Constants.CONTACT_DEBTS;
 import static com.sfaci.contacts.util.Constants.CONTACT_EMAIL;
 import static com.sfaci.contacts.util.Constants.CONTACT_MOBILE;
 import static com.sfaci.contacts.util.Constants.CONTACT_NAME;
@@ -40,7 +39,7 @@ public class Database extends SQLiteOpenHelper {
 
     // Claúsula FROM y ORDER BY para utilizar a la hora de consultar los datos
     private static String[] FROM_CURSOR = {_ID, CONTACT_NAME, CONTACT_EMAIL, CONTACT_TELEPHONE, CONTACT_MOBILE,
-                                           CONTACT_BIRTHDATE, CONTACT_PICTURE, CONTACT_DEBTS};
+                                           CONTACT_BIRTHDATE, CONTACT_PICTURE};
     private static String ORDER_BY = CONTACT_NAME + " DESC";
 
     public Database(Context contexto) {
@@ -59,8 +58,7 @@ public class Database extends SQLiteOpenHelper {
                 + CONTACT_TELEPHONE + " TEXT NOT NULL, "
                 + CONTACT_MOBILE + " TEXT NOT NULL, "
                 + CONTACT_PICTURE + " BLOB NOT NULL, "
-                + CONTACT_BIRTHDATE + " TEXT NOT NULL, "
-                + CONTACT_DEBTS + " REAL DEFAULT 0"
+                + CONTACT_BIRTHDATE + " TEXT NOT NULL"
                 + ")");
     }
 
@@ -89,7 +87,6 @@ public class Database extends SQLiteOpenHelper {
         values.put(CONTACT_MOBILE, contact.getMobile());
         values.put(CONTACT_PICTURE, PictureUtils.getBytes(contact.getPicture()));
         values.put(CONTACT_BIRTHDATE, DateUtils.toString(contact.getBirthDate()));
-        values.put(CONTACT_DEBTS, contact.getDebts());
         db.insertOrThrow(CONTACTS_TABLE, null, values);
     }
 
@@ -115,7 +112,6 @@ public class Database extends SQLiteOpenHelper {
                 contact.setBirthDate(null);
             }
             contact.setPicture(PictureUtils.getBitmap(cursor.getBlob(6)));
-            contact.setDebts(cursor.getFloat(7));
 
             contactsList.add(contact);
         }

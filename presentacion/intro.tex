@@ -56,7 +56,7 @@
     \end{block}
 \end{frame}
 
-\section{Estructura de Android} 
+\section{Estructura de una aplicación Android} 
 \subsection{Estructura del Sistema Operativo}
 \begin{frame}\frametitle{Estructura de Android}
     \begin{figure}
@@ -79,7 +79,7 @@
     \begin{columns}
         \begin{column}{4cm}
         \begin{figure}
-        \includegraphics[scale=0.2]{images/project_structure} 
+        \includegraphics[scale=0.7]{images/project_structure} 
         \caption{Proyecto Android}
         \end{figure}
         \end{column}
@@ -197,9 +197,37 @@
         versión empaquetada de la misma que sólo puede ser utilizada para esos fines.
         \item Se debe firmar con nuestro fichero de claves si queremos distribuir la aplicación y subirla a Google Play.
     \end{itemize}
-
 \end{frame}
 
+\subsection{Demo v1}
+\begin{frame}\frametitle{Demo Agenda v1}
+    
+    Aplicación Android que sirve como agenda de contactos:
+
+    \begin{itemize}
+        \item Registro de nuevos contactos
+        \item Listado de contactos
+        \item Comunicación entre Activities
+        \item Adaptador personalizado para listar los contactos
+        \item Llamada a algunas funciones del dispositivo móvil
+        \item Información no persistente (no hay base de datos)
+    \end{itemize}
+\end{frame}
+
+\section{Datos y Mapas}
+\subsection{Datos abiertos}
+\begin{frame}\frametitle{Datos abiertos}
+    \begin{block}{}
+    Es posible conectarse a Internet para obtener información de fuentes abiertas (datos abiertos)
+    \end{block}
+    \begin{itemize}
+        \item La información normalmente vendrá en formato JSON
+        \item Algunas ciudades tienen un catálogo completo de datos abiertos sobre eventos o información relativa a la misma
+        \item Normalmente estará actualizada y fácilmente disponible. Sólo hay que parsearla correctamente.
+    \end{itemize}
+\end{frame}
+
+\subsection{Mapbox}
 \begin{frame}\frametitle{Mapas}
     \begin{block}{}
     Se pueden utilizar muchas de las librerías existentes, además de Google Maps. En este caso utilizaremos la librería Mapbox, que podemos
@@ -207,8 +235,21 @@
     \end{block}
     \begin{itemize}
         \item Disponible en \emph{http://www.mapbox.com} 
+        \item Tiene toda una API disponible para realizar todo tipo de acciones sobre el mapa y también para extraer información
     \end{itemize}
+\end{frame}
 
+\subsection{Demo v2}
+\begin{frame}\frametitle{Demo Agenda v2}
+    
+    Aplicación Android que sirve como agenda de contactos e información de eventos
+
+    \begin{itemize}
+        \item Registro de nuevos contactos
+        \item Listado de contactos (aún sin base de datos)
+        \item Uso de datos abiertos para mostrar información en el dispositivo
+        \item Visualización de información sobre un mapa Mapbox
+    \end{itemize}
 \end{frame}
 
 \section{Acceso a Bases de Datos}
@@ -222,6 +263,19 @@
         \item Viene \emph{de serie} con Android
         \item Fácil de usar (sólo hay que saber \emph{SQL} y manejarse con \emph{JDBC})
         \item Muchas aplicaciones lo usan (\emph{Whatsapp}, por ejemplo)
+    \end{itemize}
+\end{frame}
+
+\subsection{Demo v3}
+\begin{frame}\frametitle{Demo Agenda v3}
+    
+    Aplicación Android que sirve como agenda de contactos almacenando la información en Base de Datos
+
+    \begin{itemize}
+        \item Registro de nuevos contactos en base de datos
+        \item Listado de contactos de la base de datos
+        \item Sin necesidad de escribir SQL para las operaciones más habituales
+        \item Información persistente (utilizando SQLite)
     \end{itemize}
 \end{frame}
 

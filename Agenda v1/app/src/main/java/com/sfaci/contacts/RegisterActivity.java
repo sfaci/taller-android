@@ -16,10 +16,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.sfaci.contacts.domain.Friend;
+import com.sfaci.contacts.domain.Contact;
+import com.sfaci.contacts.util.DateUtils;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 /**
  * Activity con el formulario para registrar o modificar un contacto
@@ -34,7 +34,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registro);
+        setContentView(R.layout.activity_register);
 
         position = getIntent().getIntExtra("position", -1);
         if (position != -1)
@@ -49,23 +49,21 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
     }
 
     private void loadContact(int position) {
-        Friend friend = MainActivity.friendsList.get(position);
+        Contact contact = MainActivity.friendsList.get(position);
 
         EditText etName = findViewById(R.id.etName);
         EditText etEmail = findViewById(R.id.etEmail);
         EditText etTelephone = findViewById(R.id.etTelephone);
         EditText etBirthDate = findViewById(R.id.etBirthDate);
         EditText etMobile = findViewById(R.id.etMobile);
-        EditText etDebts = findViewById(R.id.etDebts);
         ImageButton ibPicture = findViewById(R.id.ibFoto);
 
-        etName.setText(friend.getName());
-        etEmail.setText(friend.getEmail());
-        etTelephone.setText(friend.getTelephone());
-        etBirthDate.setText(String.valueOf(friend.getBirthDate()));
-        etMobile.setText(friend.getMobile());
-        etDebts.setText(String.valueOf(friend.getDebts()));
-        ibPicture.setImageBitmap(friend.getPicture());
+        etName.setText(contact.getName());
+        etEmail.setText(contact.getEmail());
+        etTelephone.setText(contact.getTelephone());
+        etBirthDate.setText(DateUtils.toString(contact.getBirthDate()));
+        etMobile.setText(contact.getMobile());
+        ibPicture.setImageBitmap(contact.getPicture());
     }
 
     @Override
@@ -95,7 +93,7 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_registro, menu);
+        getMenuInflater().inflate(R.menu.menu_register, menu);
         return true;
     }
 
@@ -119,36 +117,36 @@ public class RegisterActivity extends Activity implements View.OnClickListener {
                 EditText etTelephone = findViewById(R.id.etTelephone);
                 EditText etBirthDate =  findViewById(R.id.etBirthDate);
                 EditText etMobile = findViewById(R.id.etMobile);
-                EditText etDebts = findViewById(R.id.etDebts);
                 ImageButton ibPicture = findViewById(R.id.ibFoto);
 
-                Friend friend = null;
+                Contact contact = null;
                 if (position == -1)
-                    friend = new Friend();
+                    contact = new Contact();
                 else
-                    friend = MainActivity.friendsList.get(position);
+                    contact = MainActivity.friendsList.get(position);
 
                 try {
-                    friend.setName(etName.getText().toString());
-                    friend.setEmail(etEmail.getText().toString());
-                    friend.setTelephone(etTelephone.getText().toString());
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-                    friend.setBirthDate(sdf.parse(etBirthDate.getText().toString()));
-                    friend.setMobile(etMobile.getText().toString());
-                    if (etDebts.getText().toString().equals(""))
-                        etDebts.setText("0");
-                    friend.setDebts(Float.parseFloat(etDebts.getText().toString()));
-                    friend.setPicture(((BitmapDrawable) ibPicture.getDrawable()).getBitmap());
+                    contact.setName(etName.getText().toString());
+                    contact.setEmail(etEmail.getText().toString());
+                    contact.setTelephone(etTelephone.getText().toString());
+                    contact.setBirthDate(DateUtils.toDate(etBirthDate.getText().toString()));
+                    contact.setMobile(etMobile.getText().toString());
+                    contact.setPicture(((BitmapDrawable) ibPicture.getDrawable()).getBitmap());
 
                     if (position == -1)
-                        MainActivity.friendsList.add(friend);
+                        MainActivity.friendsList.add(contact);
 
                     Toast.makeText(this, R.string.msg_saved, Toast.LENGTH_LONG).show();
                 } catch (ParseException pe) {
                     Toast.makeText(this, R.string.msg_date_error, Toast.LENGTH_SHORT).show();
                 }
 
-                // TODO Limpiar el contenido de las cajas de texto
+                etName.setText("");
+                etEmail.setText("");
+                etTelephone.setText("");
+                etMobile.setText("");
+                etBirthDate.setText("");
+                ibPicture.setImageDrawable(null);
 
                 break;
             case R.id.btClose:

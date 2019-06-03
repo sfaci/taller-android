@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import com.sfaci.contacts.domain.Friend;
+import com.sfaci.contacts.domain.Contact;
 
 import java.util.ArrayList;
 
@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class MainActivity extends Activity implements View.OnClickListener {
 
-    public static ArrayList<Friend> friendsList = new ArrayList<Friend>();
+    public static ArrayList<Contact> friendsList = new ArrayList<Contact>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

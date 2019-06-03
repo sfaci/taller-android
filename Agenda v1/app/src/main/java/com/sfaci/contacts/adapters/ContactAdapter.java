@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sfaci.contacts.R;
-import com.sfaci.contacts.domain.Friend;
+import com.sfaci.contacts.domain.Contact;
 
 import java.util.ArrayList;
 
@@ -19,15 +19,15 @@ import java.util.ArrayList;
  * @author Santiago Faci
  * @version Taller Android Junio 2019
  */
-public class FriendAdapter extends BaseAdapter {
+public class ContactAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<Friend> friendsList;
+    private ArrayList<Contact> contactsList;
     private LayoutInflater inflater;
 
-    public FriendAdapter(Activity context, ArrayList<Friend> friendsList) {
+    public ContactAdapter(Activity context, ArrayList<Contact> contactsList) {
         this.context = context;
-        this.friendsList = friendsList;
+        this.contactsList = contactsList;
         inflater = LayoutInflater.from(context);
     }
 
@@ -62,23 +62,23 @@ public class FriendAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Friend friend = friendsList.get(position);
-        holder.picture.setImageBitmap(friend.getPicture());
-        holder.nameSurname.setText(friend.getName());
-        holder.telephone.setText(friend.getTelephone());
-        holder.mobile.setText(friend.getMobile());
+        Contact contact = contactsList.get(position);
+        holder.picture.setImageBitmap(contact.getPicture());
+        holder.nameSurname.setText(contact.getName());
+        holder.telephone.setText(contact.getTelephone());
+        holder.mobile.setText(contact.getMobile());
 
         return convertView;
     }
 
     @Override
     public int getCount() {
-        return friendsList.size();
+        return contactsList.size();
     }
 
     @Override
     public Object getItem(int posicion) {
-        return friendsList.get(posicion);
+        return contactsList.get(posicion);
     }
 
     @Override

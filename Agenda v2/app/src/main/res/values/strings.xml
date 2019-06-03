@@ -16,7 +16,7 @@
     <string name="lb_close">Cerrar</string>
     <string name="lb_register">Registrar</string>
     <string name="lb_list">Listar</string>
-    <string name="msg_date_error">Comprueba el formato de fecha</string>
+    <string name="msg_date_error">Comprueba el formato de date</string>
     <string name="lb_call_phone">Llamar al fijo</string>
     <string name="lb_call_mobile">Llamar al móvil</string>
     <string name="lb_edit">Editar</string>
@@ -30,5 +30,7 @@
     <string name="msg_saved">Los datos se han guardado con éxito</string>
     <string name="msg_deleted">El contacto se ha eliminado</string>
     <string name="msg_select_email">Selecciona aplicación</string>
+    <string name="lb_eventos">Ver eventos</string>
+    <string name="msg_loading_data">Cargando . . .</string>
 
 </resources>

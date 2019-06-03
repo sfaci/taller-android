@@ -71,16 +71,6 @@
         android:hint="@string/lb_birthdate"
         android:inputType="date" />
 
-    <EditText
-        android:id="@+id/etDebts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/etBirthDate"
-        android:ems="10"
-        android:hint="@string/lb_debts"
-        android:inputType="numberDecimal" />
-
     <ImageButton
         android:id="@+id/ibFoto"
         android:layout_width="wrap_content"

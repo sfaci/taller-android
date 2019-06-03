@@ -9,9 +9,9 @@ import java.util.Date;
  * @author Santiago Faci
  * @version Taller Android Junio 2019
  */
-public class Friend {
+public class Contact {
 
-    public Friend() {
+    public Contact() {
 
     }
 
@@ -21,7 +21,6 @@ public class Friend {
     private String mobile;
     private Bitmap picture;
     private Date birthDate;
-    private float debts;
 
     public String getName() {
         return name;
@@ -69,14 +68,6 @@ public class Friend {
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
-    }
-
-    public float getDebts() {
-        return debts;
-    }
-
-    public void setDebts(float debts) {
-        this.debts = debts;
     }
 
     @Override

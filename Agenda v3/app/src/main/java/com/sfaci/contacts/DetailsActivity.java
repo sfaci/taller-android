@@ -11,8 +11,6 @@ import com.sfaci.contacts.database.Database;
 import com.sfaci.contacts.domain.Contact;
 import com.sfaci.contacts.util.DateUtils;
 
-import java.text.SimpleDateFormat;
-
 /**
  * Activity donde se muestran los detalles de cada contacto
  * @author Santiago Faci
@@ -23,7 +21,7 @@ public class DetailsActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detalles);
+        setContentView(R.layout.activity_details);
 
         int posicion = getIntent().getIntExtra("position", -1);
         if (posicion != -1)
@@ -37,7 +35,6 @@ public class DetailsActivity extends Activity {
         TextView tvPhone = findViewById(R.id.tvTelephone);
         TextView tvMobile = findViewById(R.id.tvMobile);
         TextView tvBirthDate = findViewById(R.id.tvBirthDate);
-        TextView tvDebts = findViewById(R.id.tvDebts);
 
         Database db = new Database(this);
         Contact contact = db.getContacts().get(position);
@@ -48,12 +45,11 @@ public class DetailsActivity extends Activity {
         tvPhone.setText(contact.getTelephone());
         tvMobile.setText(contact.getMobile());
         tvBirthDate.setText(DateUtils.toString(contact.getBirthDate()));
-        tvDebts.setText(String.valueOf(contact.getDebts()));
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_detalles, menu);
+        getMenuInflater().inflate(R.menu.menu_details, menu);
         return true;
     }
 
